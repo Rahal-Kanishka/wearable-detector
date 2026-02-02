@@ -1,12 +1,13 @@
 #include <Arduino.h>
 #define onboard 13
 const int LED = 10;
-
+const int SWITCH_PIN = D2;
 
 void setup() {
   // put your setup code here, to run once:
   // int result = myFunction(2, 3);
   pinMode(LED, OUTPUT);
+  pinMode(SWITCH_PIN, INPUT_PULLUP);
 }
 
 void loop() {
@@ -19,11 +20,16 @@ void loop() {
   // digitalWrite(LED_BUILTIN, LOW);
    // wait for a second
   
-  
-  digitalWrite(LED, HIGH);
-  delay(1000);
-  analogWrite(LED, LOW);
-  delay(1000);
+  bool pressed = (digitalRead(SWITCH_PIN) == LOW);
+
+  digitalWrite(LED_BUILTIN, pressed ? HIGH : LOW);
+  delay(10); // small delay to reduce flicker
+
+
+  // digitalWrite(LED, HIGH);
+  // delay(1000);
+  // digitalWrite(LED, LOW);
+  // delay(1000);
 
 }
 
